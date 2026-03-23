@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pao y Joel ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #ff6a88, #ff99ac, #fad0c4, #a18cd1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: fondo 12s ease infinite;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+@keyframes fondo {
+    0% {background-position: 0%}
+    50% {background-position: 100%}
+    100% {background-position: 0%}
+}
+
+.contenedor {
+    z-index: 2;
+}
+
+/* TEXTO */
+h1, p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer 2s forwards;
+}
+
+p { animation-delay: 1s; }
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FOTOS */
+.fotos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.fotos img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ANIMACIÓN UNIÓN */
+.izq { animation: moverIzq 2s forwards; }
+.der { animation: moverDer 2s forwards; }
+
+@keyframes moverIzq {
+    from {transform: translateX(-200px);}
+    to {transform: translateX(0);}
+}
+
+@keyframes moverDer {
+    from {transform: translateX(200px);}
+    to {transform: translateX(0);}
+}
+
+/* ELEMENTOS FLOTANDO */
+.float {
+    position: absolute;
+    animation: subir 6s linear infinite;
+}
+
+@keyframes subir {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* EXPLOSIÓN */
+.explosion {
+    position: absolute;
+    font-size: 20px;
+    animation: explotar 1s forwards;
+}
+
+@keyframes explotar {
+    to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+    <h1>El primer mes de novios ❤️</h1>
+    <p>❤️Pao y Joel ❤️</p>
+
+    <div class="fotos">
+        <img class="izq" src="https://i.imgur.com/SYTSCQy.jpeg">
+        <img class="der" src="https://i.imgur.com/mddw8tK.jpeg">
+    </div>
+
+    <p style="margin-top:15px;">
+        Te amo mucho mi amor 🫂❤️
+    </p>
+</div>
+
+<!-- AUDIO -->
+<audio id="audio">
+    <source src="https://files.catbox.moe/kad3i1.m4a" type="audio/mp4">
+</audio>
+
+<script>
+// activar audio
+document.body.addEventListener("click", function() {
+    document.getElementById("audio").play();
+}, { once: true });
+
+// elementos flotantes (corazones, flores, estrellas)
+const elementos = ["❤️","🌸","🌼","✨","💖"];
+
+function crearElemento() {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerHTML = elementos[Math.floor(Math.random()*elementos.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 25 + 15) + "px";
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 6000);
+}
+
+setInterval(crearElemento, 200);
+
+// explosión
+function explosion() {
+    for (let i = 0; i < 20; i++) {
+        const e = document.createElement("div");
+        e.className = "explosion";
+        e.innerHTML = "💖";
+        e.style.left = "50%";
+        e.style.top = "50%";
+        e.style.setProperty('--x', (Math.random()*200-100)+'px');
+        e.style.setProperty('--y', (Math.random()*200-100)+'px');
+        document.body.appendChild(e);
+
+        setTimeout(() => e.remove(), 1000);
+    }
+}
+setInterval(explosion, 2500);
+</script>
+
+</body>
+</html>
